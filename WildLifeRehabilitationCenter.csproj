@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Presentation\" />
     <Folder Include="Business\" />
   </ItemGroup>
 

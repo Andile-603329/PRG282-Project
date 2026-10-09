@@ -29,7 +29,7 @@ namespace WildLifeRehabilitationCenter.Data
             }
         }
 
-        public Animal(string animalID,string name,string gender,string species,int? age,DateTime dateAdmitted)
+        public Animal(string animalID,string name,string species, int? age, string gender,DateTime dateAdmitted)
         {
             AnimalID = animalID;
             Name = name;

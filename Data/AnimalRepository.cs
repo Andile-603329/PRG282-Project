@@ -98,7 +98,7 @@ namespace WildLifeRehabilitationCenter.Data
                             continue;
                             //skip bad line
                         }
-
+                        
                         Animal animal = new Animal(AnimalID, Name, Species, AgeValue, Gender, DateAdmitted)
                         {
                             RecoveryScore = recoveryScore

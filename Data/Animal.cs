@@ -6,7 +6,40 @@ using System.Threading.Tasks;
 
 namespace WildLifeRehabilitationCenter.Data
 {
-    internal class Animal
+    public class Animal
     {
+        public string AnimalID { get; init; }
+
+        public string Name { get; set; }
+        public string Species { get; set; }
+        public string Gender { get; set; }
+        public int? Age { get; set; }
+        public DateTime DateAdmitted { get; init; }
+        public int RecoveryScore { get; set; }
+
+        public void SetRecoveryScore(int Value)
+        {
+            if(Value >= 0)
+            {
+                RecoveryScore = Value;
+            }
+            else
+            {
+                //Exception here 
+            }
+        }
+
+        public Animal(string animalID,string name,string gender,string species,int? age,DateTime dateAdmitted)
+        {
+            AnimalID = animalID;
+            Name = name;
+            Age = age;
+            Gender = gender;
+            DateAdmitted = dateAdmitted;
+            Species = species;
+        }
+
+
+
     }
 }

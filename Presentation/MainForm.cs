@@ -1,3 +1,5 @@
+
+using WildLifeRehabilitationCenter;
 namespace WildLifeRehabilitationCenter.Presentation
 {
     public partial class MainForm : Form
@@ -15,6 +17,12 @@ namespace WildLifeRehabilitationCenter.Presentation
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            AddAnimalForm addForm = new AddAnimalForm();
+            addForm.ShowDialog();
         }
     }
 }

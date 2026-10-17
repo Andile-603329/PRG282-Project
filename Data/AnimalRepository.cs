@@ -117,6 +117,26 @@ namespace WildLifeRehabilitationCenter.Data
             return animals;
 
         }
-        
+
+        public void SaveAllAnimals(List<Animal> animals)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(fileName, append: false))
+                {
+                    foreach (var animal in animals)
+                    {
+                        string ageValue = animal.Age.HasValue ? animal.Age.Value.ToString() : "";
+                        string line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{ageValue}|{animal.Gender}|{animal.DateAdmitted}|{animal.RecoveryScore}";
+                        writer.WriteLine(line);
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
     }
 }

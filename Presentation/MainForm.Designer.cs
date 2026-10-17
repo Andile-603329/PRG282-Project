@@ -108,6 +108,7 @@
             btnEdit.TabIndex = 17;
             btnEdit.Text = "Edit Animal";
             btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
             // 
             // lblSelectedAnimalName
             // 

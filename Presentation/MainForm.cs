@@ -1,6 +1,8 @@
 using WildLifeRehabilitationCenter;
 using WildLifeRehabilitationCenter.Business;
 using WildLifeRehabilitationCenter.Data;
+using System;
+using System.Windows.Forms;
 
 namespace WildLifeRehabilitationCenter.Presentation
 {
@@ -48,6 +50,26 @@ namespace WildLifeRehabilitationCenter.Presentation
             else
             {
                 MessageBox.Show("Please select an animal row to delete.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvAnimals.SelectedRows.Count > 0)
+            {
+                var selectedAnimal = (Animal)dgvAnimals.SelectedRows[0].DataBoundItem;
+
+                using (AddAnimalForm editForm = new AddAnimalForm(selectedAnimal))
+                {
+                    if (editForm.ShowDialog() == DialogResult.OK)
+                    {
+                        dgvAnimals.Refresh();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an animal row to edit.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

@@ -7,17 +7,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WildLifeRehabilitationCenter.Business;
 using WildLifeRehabilitationCenter.Data;
 
 namespace WildLifeRehabilitationCenter
 {
     public partial class AddAnimalForm : Form
     {
+        private Animal _animalToEdit;
+        private bool _isEditMode => _animalToEdit != null;
+
         private readonly AnimalRepository repository = new AnimalRepository();
         public AddAnimalForm()
         {
             InitializeComponent();
+        }
 
+        public AddAnimalForm(Animal animalToEdit)
+        {
+            InitializeComponent();
+            _animalToEdit = animalToEdit;
+            PopulateFormFields();
+        }
+
+        private void PopulateFormFields()
+        {
+            if (_isEditMode)
+            {
+                this.Text = "Edit Animal"; // Change window title
+
+                txtAnimalID.Text = _animalToEdit.AnimalID;
+                txtAnimalID.Enabled = false; // Lock ID so it can't be modified
+
+                txtName.Text = _animalToEdit.Name;
+                txtSpecies.Text = _animalToEdit.Species;
+                cmbGender.Text = _animalToEdit.Gender;
+                txtAge.Text = _animalToEdit.Age?.ToString() ?? "";
+                txtRecoveryScore.Text = _animalToEdit.RecoveryScore.ToString();
+                // DateAdmitted, etc.
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -77,9 +105,6 @@ namespace WildLifeRehabilitationCenter
 
         private void btnAddAnimal_Click(object sender, EventArgs e)
         {
-
-
-
             // Get the information entered by the user
             string animalID = txtAnimalID.Text.Trim().ToUpper();
             string name = txtName.Text.Trim();
@@ -170,37 +195,62 @@ namespace WildLifeRehabilitationCenter
                 }
             }
 
-            // Create the new animal
-            Animal newAnimal = new Animal(
-                animalID,
-                name,
-                species,
-                age,
-                gender,
-                DateTime.Now)
+
+            if (_isEditMode)
             {
-                RecoveryScore = score
-            };
+                btnAddAnimal.Text = "Update Animal"; // Change button text
 
-            // Save the animal
-            repository.SaveAnimal(newAnimal);
+                // Update the properties of the existing object in memory
+                _animalToEdit.Name = txtName.Text;
+                _animalToEdit.Species = txtSpecies.Text;
+                _animalToEdit.Gender = cmbGender.Text;
+                _animalToEdit.Age = string.IsNullOrEmpty(txtAge.Text) ? (int?)null : int.Parse(txtAge.Text);
+                _animalToEdit.SetRecoveryScore(int.Parse(txtRecoveryScore.Text));
 
-            MessageBox.Show("Animal added successfully!");
+                // Call your Update service
+                AnimalService service = new AnimalService();
+                service.UpdateAnimal(_animalToEdit);
+            }
+            else
+            {
+                // Create the new animal
+                Animal newAnimal = new Animal(
+                    animalID,
+                    name,
+                    species,
+                    age,
+                    gender,
+                    DateTime.Now)
+                {
+                    RecoveryScore = score
+                };
 
-            // Clear the form
-            txtAnimalID.Clear();
-            txtName.Clear();
-            txtSpecies.Clear();
-            txtAge.Clear();
-            cmbGender.SelectedIndex = -1;
-            txtRecoveryScore.Clear();
+                // Save the animal
+                repository.SaveAnimal(newAnimal);
 
-            lblStatus.Text = "Status: Not calculated";
-            lblHousingUnit.Text = "Housing Unit: Not calculated";
+                MessageBox.Show("Animal added successfully!");
 
-            txtAnimalID.Focus();
+                // Clear the form
+                txtAnimalID.Clear();
+                txtName.Clear();
+                txtSpecies.Clear();
+                txtAge.Clear();
+                cmbGender.SelectedIndex = -1;
+                txtRecoveryScore.Clear();
+
+                lblStatus.Text = "Status: Not calculated";
+                lblHousingUnit.Text = "Housing Unit: Not calculated";
+
+                txtAnimalID.Focus();
+            }
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
-        
-    
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -38,12 +38,8 @@ namespace WildLifeRehabilitationCenter.Business
                     animalsWithAge = animalsWithAge + 1;
                 }
 
-
-
-                ////////////////
-                // TODO: replace this line with the team's classification method (Step 2A).
-                ////////////
-                string status = "";
+                // Ask the classifier which status this score belongs to.
+                string status = AnimalClassifier.Classify(animal.RecoveryScore).Status;
 
                 result.StatusCounts[status] = result.StatusCounts[status] + 1;
             }

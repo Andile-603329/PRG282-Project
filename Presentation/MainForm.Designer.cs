@@ -46,6 +46,7 @@
             AddEditComponents = new GroupBox();
             lblEditSelected = new Label();
             lblAnimalID = new Label();
+            btnGenerateSummary = new Button();
             ViewAnimals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
             DeleteAnimal.SuspendLayout();
@@ -153,6 +154,7 @@
             // 
             // AnimalSummary
             // 
+            AnimalSummary.Controls.Add(btnGenerateSummary);
             AnimalSummary.Controls.Add(richTextBox1);
             AnimalSummary.Location = new Point(25, 223);
             AnimalSummary.Margin = new Padding(3, 2, 3, 2);
@@ -246,6 +248,17 @@
             lblAnimalID.TabIndex = 0;
             lblAnimalID.Text = "Animal Selected:";
             // 
+            // btnGenerateSummary
+            // 
+            btnGenerateSummary.Location = new Point(223, 20);
+            btnGenerateSummary.Margin = new Padding(3, 2, 3, 2);
+            btnGenerateSummary.Name = "btnGenerateSummary";
+            btnGenerateSummary.Size = new Size(101, 22);
+            btnGenerateSummary.TabIndex = 20;
+            btnGenerateSummary.Text = "Summary";
+            btnGenerateSummary.UseVisualStyleBackColor = true;
+            btnGenerateSummary.Click += btnGenerateSummary_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -293,5 +306,6 @@
         private GroupBox AddEditComponents;
         private Label lblAnimalID;
         private Label lblEditSelected;
+        private Button btnGenerateSummary;
     }
 }

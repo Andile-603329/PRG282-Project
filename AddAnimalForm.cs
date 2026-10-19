@@ -37,6 +37,7 @@ namespace WildLifeRehabilitationCenter
             {
                 this.Text = "Edit Animal"; // Change window title
                 btnAddAnimal.Text = "Update Animal"; // Change button text
+                lblTitle.Text = "Edit Animal"; // Change label text
 
                 txtAnimalID.Text = _animalToEdit.AnimalID;
                 txtAnimalID.Enabled = false;
@@ -45,6 +46,7 @@ namespace WildLifeRehabilitationCenter
                 txtSpecies.Text = _animalToEdit.Species;
                 cmbGender.Text = _animalToEdit.Gender;
                 txtAge.Text = _animalToEdit.Age?.ToString() ?? "";
+                txtRecoveryScore.Text = _animalToEdit.RecoveryScore.ToString();
                 cmbHousingUnit.Text = _animalToEdit.HousingUnit;
             }
         }

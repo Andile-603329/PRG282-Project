@@ -11,6 +11,10 @@ namespace WildLifeRehabilitationCenter.Presentation
         public MainForm()
         {
             InitializeComponent();
+            AnimalRepository AnimalRepo = new AnimalRepository();
+            List<Animal> List = AnimalRepo.GetAllAnimals();
+            dgvAnimals.DataSource = AnimalRepo.LoadAnimals(List);
+            
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)

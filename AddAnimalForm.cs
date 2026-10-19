@@ -1,54 +1,76 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
+using System.IO;
 using System.Windows.Forms;
+using WildLifeRehabilitationCenter.Business;
 using WildLifeRehabilitationCenter.Data;
 
 namespace WildLifeRehabilitationCenter
 {
     public partial class AddAnimalForm : Form
     {
+        private Animal? _animalToEdit;
+
+        private bool _isEditMode
+        {
+            get { return _animalToEdit != null; }
+        }
+
         private readonly AnimalRepository repository = new AnimalRepository();
+
+        private const string FilePath = "Animals.txt";
+
         public AddAnimalForm()
         {
             InitializeComponent();
+        }
 
+        public AddAnimalForm(Animal animalToEdit)
+        {
+            InitializeComponent();
+
+            _animalToEdit = animalToEdit;
+            PopulateFormFields();
+        }
+
+        private void PopulateFormFields()
+        {
+            if (_animalToEdit != null)
+            {
+                this.Text = "Edit Animal";
+                btnAddAnimal.Text = "Update Animal";
+
+                txtAnimalID.Text = _animalToEdit.AnimalID;
+                txtAnimalID.Enabled = false;
+                txtName.Text = _animalToEdit.Name;
+                txtSpecies.Text = _animalToEdit.Species;
+                txtAge.Text = _animalToEdit.Age?.ToString() ?? "";
+                txtRecoveryScore.Text =
+                    _animalToEdit.RecoveryScore.ToString();
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void AddAnimalForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void txtRecoveryScore_TextChanged(object sender, EventArgs e)
         {
             int score;
 
-            // Check if the score is a valid number
-            if (!int.TryParse(txtRecoveryScore.Text, out score))
+            if (!int.TryParse(txtRecoveryScore.Text, out score)
+                || score < 0 || score > 100)
             {
                 lblStatus.Text = "Status: Not calculated";
                 lblHousingUnit.Text = "Housing Unit: Not calculated";
                 return;
             }
 
-            // Check if the score is between 0 and 100
-            if (score < 0 || score > 100)
-            {
-                lblStatus.Text = "Status: Invalid score";
-                lblHousingUnit.Text = "Housing Unit: Invalid score";
-            }
-            else if (score <= 19)
+            if (score <= 19)
             {
                 lblStatus.Text = "Status: Critical";
                 lblHousingUnit.Text = "Housing Unit: Intensive Care Unit";
@@ -77,122 +99,165 @@ namespace WildLifeRehabilitationCenter
 
         private void btnAddAnimal_Click(object sender, EventArgs e)
         {
-
-
-
-            // Get the information entered by the user
-            string animalID = txtAnimalID.Text.Trim().ToUpper();
-            string name = txtName.Text.Trim();
-            string species = txtSpecies.Text.Trim();
-            string gender = cmbGender.Text;
-            int age;
-            int score;
-
-            // Check the Animal ID
-            if (!animalID.StartsWith("WR-") || animalID.Length != 7)
+            if (_isEditMode)
             {
-                MessageBox.Show("Enter an Animal ID like WR-1234.");
-                txtAnimalID.Focus();
-                return;
+                UpdateAnimal();
             }
+            else
+            {
+                AddNewAnimal();
+            }
+        }
 
+        private bool ValidateAnimal(
+            out string animalID,
+            out string name,
+            out string species,
+            out int age,
+            out int score)
+        {
+            animalID = txtAnimalID.Text.Trim().ToUpper();
+            name = txtName.Text.Trim();
+            species = txtSpecies.Text.Trim();
+            age = 0;
+            score = 0;
 
-            // Check that all four characters after WR- are digits
-            bool validDigits = true;
+            if (animalID.Length != 7 ||
+                !animalID.StartsWith("WR-"))
+            {
+                MessageBox.Show("Enter an Animal ID like WR-0001.");
+                txtAnimalID.Focus();
+                return false;
+            }
 
             for (int i = 3; i < 7; i++)
             {
                 if (animalID[i] < '0' || animalID[i] > '9')
                 {
-                    validDigits = false;
-                    break;
+                    MessageBox.Show(
+                        "Animal ID must contain four digits after WR-.");
+                    txtAnimalID.Focus();
+                    return false;
                 }
             }
 
-            if (!validDigits)
-            {
-                MessageBox.Show("The Animal ID must contain four numbers after WR-.");
-                txtAnimalID.Focus();
-                return;
-            }
-
-            // Check that the name was entered
             if (name == "" || name.Length > 30 || name.Contains("|"))
             {
                 MessageBox.Show("Enter a name of 1 to 30 characters.");
                 txtName.Focus();
-                return;
+                return false;
             }
 
-            // Check that the species was entered
-            if (species == "" || species.Length > 30 || species.Contains("|"))
+            if (species == "" || species.Length > 30 ||
+                species.Contains("|"))
             {
                 MessageBox.Show("Enter a species of 1 to 30 characters.");
                 txtSpecies.Focus();
-                return;
+                return false;
             }
 
-            // Check the age
-            if (!int.TryParse(txtAge.Text, out age) || age < 0 || age > 100)
+            if (!int.TryParse(txtAge.Text, out age) ||
+                age < 0 || age > 100)
             {
-                MessageBox.Show("Age must be a whole number between 0 and 100.");
+                MessageBox.Show(
+                    "Age must be a whole number between 0 and 100.");
                 txtAge.Focus();
-                return;
+                return false;
             }
 
-            // Check that a gender was selected
-            if (gender == "")
+            if (!int.TryParse(txtRecoveryScore.Text, out score) ||
+                score < 0 || score > 100)
             {
-                MessageBox.Show("Please select a gender.");
-                cmbGender.Focus();
-                return;
-            }
-
-            // Check the recovery score
-            if (!int.TryParse(txtRecoveryScore.Text, out score)
-                || score < 0 || score > 100)
-            {
-                MessageBox.Show("Recovery score must be between 0 and 100.");
+                MessageBox.Show(
+                    "Recovery score must be between 0 and 100.");
                 txtRecoveryScore.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        private void AddNewAnimal()
+        {
+            string animalID;
+            string name;
+            string species;
+            int age;
+            int score;
+
+            if (!ValidateAnimal(
+                out animalID, out name, out species, out age, out score))
+            {
                 return;
             }
 
-            // Check whether the Animal ID already exists
-            List<Animal> animals = repository.GetAllAnimals();
-
-            foreach (Animal animal in animals)
+            // Check for duplicate IDs in the data file.
+            if (File.Exists(FilePath))
             {
-                if (animal.AnimalID.ToUpper() == animalID)
+                string[] lines = File.ReadAllLines(FilePath);
+
+                foreach (string line in lines)
                 {
-                    MessageBox.Show("This Animal ID already exists.");
-                    txtAnimalID.Focus();
-                    return;
+                    string[] fields = line.Split('|');
+
+                    if (fields.Length > 0 &&
+                        fields[0].Trim().ToUpper() == animalID)
+                    {
+                        MessageBox.Show("This Animal ID already exists.");
+                        txtAnimalID.Focus();
+                        return;
+                    }
                 }
             }
 
-            // Create the new animal
-            Animal newAnimal = new Animal(
-                animalID,
-                name,
-                species,
-                age,
-                gender,
-                DateTime.Now)
-            {
-                RecoveryScore = score
-            };
+            // Calculate the animal's status and housing unit.
+            string status;
+            string housingUnit;
 
-            // Save the animal
-            repository.SaveAnimal(newAnimal);
+            if (score <= 19)
+            {
+                status = "Critical";
+                housingUnit = "Intensive Care Unit";
+            }
+            else if (score <= 39)
+            {
+                status = "Serious";
+                housingUnit = "High-Dependency Ward";
+            }
+            else if (score <= 59)
+            {
+                status = "Stable";
+                housingUnit = "Recovery Ward";
+            }
+            else if (score <= 79)
+            {
+                status = "Recovering";
+                housingUnit = "Outdoor Enclosure";
+            }
+            else
+            {
+                status = "Release-Ready";
+                housingUnit = "Pre-Release Camp";
+            }
+
+            // Save exactly seven fields in the required order.
+            string record = animalID + "|" +
+                            name + "|" +
+                            species + "|" +
+                            age + "|" +
+                            score + "|" +
+                            status + "|" +
+                            housingUnit;
+
+            File.AppendAllText(FilePath, record + Environment.NewLine);
 
             MessageBox.Show("Animal added successfully!");
 
-            // Clear the form
+            // Clear the form for the next animal.
             txtAnimalID.Clear();
             txtName.Clear();
             txtSpecies.Clear();
             txtAge.Clear();
-            cmbGender.SelectedIndex = -1;
             txtRecoveryScore.Clear();
 
             lblStatus.Text = "Status: Not calculated";
@@ -200,7 +265,44 @@ namespace WildLifeRehabilitationCenter
 
             txtAnimalID.Focus();
         }
-        
-    
+
+        private void UpdateAnimal()
+        {
+            string animalID;
+            string name;
+            string species;
+            int age;
+            int score;
+
+            if (!ValidateAnimal(
+                out animalID, out name, out species, out age, out score))
+            {
+                return;
+            }
+
+            if (_animalToEdit == null)
+            {
+                MessageBox.Show("No animal was selected to update.");
+                return;
+            }
+
+            _animalToEdit.Name = name;
+            _animalToEdit.Species = species;
+            _animalToEdit.Age = age;
+            _animalToEdit.SetRecoveryScore(score);
+
+            AnimalService service = new AnimalService();
+            service.UpdateAnimal(_animalToEdit);
+
+            MessageBox.Show("Animal updated successfully!");
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

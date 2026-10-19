@@ -35,12 +35,10 @@
             lblName = new Label();
             lblSpecies = new Label();
             lblAge = new Label();
-            lblGender = new Label();
             lblRecoveryScore = new Label();
             txtName = new TextBox();
             txtSpecies = new TextBox();
             txtAge = new TextBox();
-            cmbGender = new ComboBox();
             txtRecoveryScore = new TextBox();
             lblStatus = new Label();
             lblHousingUnit = new Label();
@@ -103,19 +101,10 @@
             lblAge.TabIndex = 5;
             lblAge.Text = "Age";
             // 
-            // lblGender
-            // 
-            lblGender.AutoSize = true;
-            lblGender.Location = new Point(53, 367);
-            lblGender.Name = "lblGender";
-            lblGender.Size = new Size(57, 20);
-            lblGender.TabIndex = 6;
-            lblGender.Text = "Gender";
-            // 
             // lblRecoveryScore
             // 
             lblRecoveryScore.AutoSize = true;
-            lblRecoveryScore.Location = new Point(53, 426);
+            lblRecoveryScore.Location = new Point(49, 360);
             lblRecoveryScore.Name = "lblRecoveryScore";
             lblRecoveryScore.Size = new Size(110, 20);
             lblRecoveryScore.TabIndex = 7;
@@ -142,19 +131,9 @@
             txtAge.Size = new Size(242, 27);
             txtAge.TabIndex = 10;
             // 
-            // cmbGender
-            // 
-            cmbGender.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbGender.FormattingEnabled = true;
-            cmbGender.Items.AddRange(new object[] { "Female", "Male" });
-            cmbGender.Location = new Point(166, 367);
-            cmbGender.Name = "cmbGender";
-            cmbGender.Size = new Size(242, 28);
-            cmbGender.TabIndex = 11;
-            // 
             // txtRecoveryScore
             // 
-            txtRecoveryScore.Location = new Point(166, 426);
+            txtRecoveryScore.Location = new Point(166, 353);
             txtRecoveryScore.Name = "txtRecoveryScore";
             txtRecoveryScore.Size = new Size(242, 27);
             txtRecoveryScore.TabIndex = 12;
@@ -163,7 +142,7 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(66, 494);
+            lblStatus.Location = new Point(49, 438);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(153, 20);
             lblStatus.TabIndex = 13;
@@ -172,7 +151,7 @@
             // lblHousingUnit
             // 
             lblHousingUnit.AutoSize = true;
-            lblHousingUnit.Location = new Point(66, 532);
+            lblHousingUnit.Location = new Point(53, 486);
             lblHousingUnit.Name = "lblHousingUnit";
             lblHousingUnit.Size = new Size(199, 20);
             lblHousingUnit.TabIndex = 14;
@@ -196,6 +175,7 @@
             btnCancel.TabIndex = 16;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // contextMenuStrip1
             // 
@@ -213,12 +193,10 @@
             Controls.Add(lblHousingUnit);
             Controls.Add(lblStatus);
             Controls.Add(txtRecoveryScore);
-            Controls.Add(cmbGender);
             Controls.Add(txtAge);
             Controls.Add(txtSpecies);
             Controls.Add(txtName);
             Controls.Add(lblRecoveryScore);
-            Controls.Add(lblGender);
             Controls.Add(lblAge);
             Controls.Add(lblSpecies);
             Controls.Add(lblName);
@@ -241,12 +219,10 @@
         private Label lblName;
         private Label lblSpecies;
         private Label lblAge;
-        private Label lblGender;
         private Label lblRecoveryScore;
         private TextBox txtName;
         private TextBox txtSpecies;
         private TextBox txtAge;
-        private ComboBox cmbGender;
         private TextBox txtRecoveryScore;
         private Label lblStatus;
         private Label lblHousingUnit;

@@ -1,212 +1,188 @@
-﻿namespace WildLifeRehabilitationCenter
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace WildLifeRehabilitationCenter
 {
     partial class AddAnimalForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+
             lblTitle = new Label();
             lblAnimalId = new Label();
             txtAnimalID = new TextBox();
             lblName = new Label();
-            lblSpecies = new Label();
-            lblAge = new Label();
-            lblRecoveryScore = new Label();
             txtName = new TextBox();
+            lblSpecies = new Label();
             txtSpecies = new TextBox();
+            lblAge = new Label();
             txtAge = new TextBox();
+            lblRecoveryScore = new Label();
             txtRecoveryScore = new TextBox();
             lblStatus = new Label();
             lblHousingUnit = new Label();
             btnAddAnimal = new Button();
             btnCancel = new Button();
             contextMenuStrip1 = new ContextMenuStrip(components);
+
             SuspendLayout();
-            // 
-            // lblTitle
-            // 
+
+            // Form title
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Segoe UI", 16F);
-            lblTitle.Location = new Point(280, 28);
+            lblTitle.Location = new Point(250, 28);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(217, 37);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Add New Animal";
             lblTitle.Click += label1_Click;
-            // 
-            // lblAnimalId
-            // 
+
+            // Animal ID
             lblAnimalId.AutoSize = true;
             lblAnimalId.Location = new Point(53, 119);
             lblAnimalId.Name = "lblAnimalId";
             lblAnimalId.Size = new Size(75, 20);
             lblAnimalId.TabIndex = 1;
             lblAnimalId.Text = "Animal ID";
-            // 
-            // txtAnimalID
-            // 
+
             txtAnimalID.Location = new Point(166, 119);
             txtAnimalID.Name = "txtAnimalID";
             txtAnimalID.Size = new Size(242, 27);
             txtAnimalID.TabIndex = 2;
-            // 
-            // lblName
-            // 
+
+            // Name
             lblName.AutoSize = true;
             lblName.Location = new Point(53, 183);
             lblName.Name = "lblName";
             lblName.Size = new Size(49, 20);
             lblName.TabIndex = 3;
             lblName.Text = "Name";
-            // 
-            // lblSpecies
-            // 
+
+            txtName.Location = new Point(166, 183);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(242, 27);
+            txtName.TabIndex = 4;
+
+            // Species
             lblSpecies.AutoSize = true;
             lblSpecies.Location = new Point(53, 241);
             lblSpecies.Name = "lblSpecies";
             lblSpecies.Size = new Size(59, 20);
-            lblSpecies.TabIndex = 4;
+            lblSpecies.TabIndex = 5;
             lblSpecies.Text = "Species";
-            // 
-            // lblAge
-            // 
+
+            txtSpecies.Location = new Point(166, 241);
+            txtSpecies.Name = "txtSpecies";
+            txtSpecies.Size = new Size(242, 27);
+            txtSpecies.TabIndex = 6;
+
+            // Age
             lblAge.AutoSize = true;
             lblAge.Location = new Point(49, 300);
             lblAge.Name = "lblAge";
             lblAge.Size = new Size(36, 20);
-            lblAge.TabIndex = 5;
+            lblAge.TabIndex = 7;
             lblAge.Text = "Age";
-            // 
-            // lblRecoveryScore
-            // 
+
+            txtAge.Location = new Point(166, 297);
+            txtAge.Name = "txtAge";
+            txtAge.Size = new Size(242, 27);
+            txtAge.TabIndex = 8;
+
+            // Recovery score
             lblRecoveryScore.AutoSize = true;
             lblRecoveryScore.Location = new Point(49, 360);
             lblRecoveryScore.Name = "lblRecoveryScore";
             lblRecoveryScore.Size = new Size(110, 20);
-            lblRecoveryScore.TabIndex = 7;
+            lblRecoveryScore.TabIndex = 9;
             lblRecoveryScore.Text = "Recovery Score";
-            // 
-            // txtName
-            // 
-            txtName.Location = new Point(166, 183);
-            txtName.Name = "txtName";
-            txtName.Size = new Size(242, 27);
-            txtName.TabIndex = 8;
-            // 
-            // txtSpecies
-            // 
-            txtSpecies.Location = new Point(166, 241);
-            txtSpecies.Name = "txtSpecies";
-            txtSpecies.Size = new Size(242, 27);
-            txtSpecies.TabIndex = 9;
-            // 
-            // txtAge
-            // 
-            txtAge.Location = new Point(166, 297);
-            txtAge.Name = "txtAge";
-            txtAge.Size = new Size(242, 27);
-            txtAge.TabIndex = 10;
-            // 
-            // txtRecoveryScore
-            // 
+
             txtRecoveryScore.Location = new Point(166, 353);
             txtRecoveryScore.Name = "txtRecoveryScore";
             txtRecoveryScore.Size = new Size(242, 27);
-            txtRecoveryScore.TabIndex = 12;
+            txtRecoveryScore.TabIndex = 10;
             txtRecoveryScore.TextChanged += txtRecoveryScore_TextChanged;
-            // 
-            // lblStatus
-            // 
+
+            // Animal status
             lblStatus.AutoSize = true;
             lblStatus.Location = new Point(49, 438);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(153, 20);
-            lblStatus.TabIndex = 13;
+            lblStatus.TabIndex = 11;
             lblStatus.Text = "Status: Not calculated";
-            // 
-            // lblHousingUnit
-            // 
+
+            // Housing unit
             lblHousingUnit.AutoSize = true;
             lblHousingUnit.Location = new Point(53, 486);
             lblHousingUnit.Name = "lblHousingUnit";
             lblHousingUnit.Size = new Size(199, 20);
-            lblHousingUnit.TabIndex = 14;
+            lblHousingUnit.TabIndex = 12;
             lblHousingUnit.Text = "Housing Unit: Not calculated";
-            // 
-            // btnAddAnimal
-            // 
+
+            // Add or update button
             btnAddAnimal.Location = new Point(255, 572);
             btnAddAnimal.Name = "btnAddAnimal";
             btnAddAnimal.Size = new Size(114, 29);
-            btnAddAnimal.TabIndex = 15;
+            btnAddAnimal.TabIndex = 13;
             btnAddAnimal.Text = "Add Animal";
             btnAddAnimal.UseVisualStyleBackColor = true;
             btnAddAnimal.Click += btnAddAnimal_Click;
-            // 
-            // btnCancel
-            // 
+
+            // Cancel button
             btnCancel.Location = new Point(403, 572);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(104, 29);
-            btnCancel.TabIndex = 16;
+            btnCancel.TabIndex = 14;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
-            // 
-            // contextMenuStrip1
-            // 
+
+            // Context menu
             contextMenuStrip1.ImageScalingSize = new Size(20, 20);
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
-            // 
-            // AddAnimalForm
-            // 
+
+            // Add Animal form
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(782, 603);
+            ClientSize = new Size(782, 630);
+
             Controls.Add(btnCancel);
             Controls.Add(btnAddAnimal);
             Controls.Add(lblHousingUnit);
             Controls.Add(lblStatus);
             Controls.Add(txtRecoveryScore);
-            Controls.Add(txtAge);
-            Controls.Add(txtSpecies);
-            Controls.Add(txtName);
             Controls.Add(lblRecoveryScore);
+            Controls.Add(txtAge);
             Controls.Add(lblAge);
+            Controls.Add(txtSpecies);
             Controls.Add(lblSpecies);
+            Controls.Add(txtName);
             Controls.Add(lblName);
             Controls.Add(txtAnimalID);
             Controls.Add(lblAnimalId);
             Controls.Add(lblTitle);
+
             Name = "AddAnimalForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Add New Animal";
             Load += AddAnimalForm_Load;
+
             ResumeLayout(false);
             PerformLayout();
         }
@@ -217,12 +193,12 @@
         private Label lblAnimalId;
         private TextBox txtAnimalID;
         private Label lblName;
-        private Label lblSpecies;
-        private Label lblAge;
-        private Label lblRecoveryScore;
         private TextBox txtName;
+        private Label lblSpecies;
         private TextBox txtSpecies;
+        private Label lblAge;
         private TextBox txtAge;
+        private Label lblRecoveryScore;
         private TextBox txtRecoveryScore;
         private Label lblStatus;
         private Label lblHousingUnit;

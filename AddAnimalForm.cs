@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.IO;
+﻿using System;
 using System.Windows.Forms;
 using WildLifeRehabilitationCenter.Business;
 using WildLifeRehabilitationCenter.Data;
@@ -10,15 +8,12 @@ namespace WildLifeRehabilitationCenter
     public partial class AddAnimalForm : Form
     {
         private Animal? _animalToEdit;
+        private readonly AnimalRepository repository = new AnimalRepository();
 
         private bool _isEditMode
         {
             get { return _animalToEdit != null; }
         }
-
-        private readonly AnimalRepository repository = new AnimalRepository();
-
-        private const string FilePath = "Animals.txt";
 
         public AddAnimalForm()
         {
@@ -58,11 +53,10 @@ namespace WildLifeRehabilitationCenter
         {
         }
 
-        private void txtRecoveryScore_TextChanged(object sender, EventArgs e)
+        private void txtRecoveryScore_TextChanged(
+            object sender, EventArgs e)
         {
-            int score;
-
-            if (!int.TryParse(txtRecoveryScore.Text, out score)
+            if (!int.TryParse(txtRecoveryScore.Text, out int score)
                 || score < 0 || score > 100)
             {
                 lblStatus.Text = "Status: Not calculated";
@@ -73,12 +67,14 @@ namespace WildLifeRehabilitationCenter
             if (score <= 19)
             {
                 lblStatus.Text = "Status: Critical";
-                lblHousingUnit.Text = "Housing Unit: Intensive Care Unit";
+                lblHousingUnit.Text =
+                    "Housing Unit: Intensive Care Unit";
             }
             else if (score <= 39)
             {
                 lblStatus.Text = "Status: Serious";
-                lblHousingUnit.Text = "Housing Unit: High-Dependency Ward";
+                lblHousingUnit.Text =
+                    "Housing Unit: High-Dependency Ward";
             }
             else if (score <= 59)
             {
@@ -88,12 +84,14 @@ namespace WildLifeRehabilitationCenter
             else if (score <= 79)
             {
                 lblStatus.Text = "Status: Recovering";
-                lblHousingUnit.Text = "Housing Unit: Outdoor Enclosure";
+                lblHousingUnit.Text =
+                    "Housing Unit: Outdoor Enclosure";
             }
             else
             {
                 lblStatus.Text = "Status: Release-Ready";
-                lblHousingUnit.Text = "Housing Unit: Pre-Release Camp";
+                lblHousingUnit.Text =
+                    "Housing Unit: Pre-Release Camp";
             }
         }
 
@@ -179,81 +177,45 @@ namespace WildLifeRehabilitationCenter
 
         private void AddNewAnimal()
         {
-            string animalID;
-            string name;
-            string species;
-            int age;
-            int score;
-
             if (!ValidateAnimal(
-                out animalID, out name, out species, out age, out score))
+                out string animalID,
+                out string name,
+                out string species,
+                out int age,
+                out int score))
             {
                 return;
             }
 
-            // Check for duplicate IDs in the data file.
-            if (File.Exists(FilePath))
+            // Check whether this Animal ID already exists.
+            foreach (Animal animal in repository.GetAllAnimals())
             {
-                string[] lines = File.ReadAllLines(FilePath);
-
-                foreach (string line in lines)
+                if (animal.AnimalID.Equals(
+                    animalID, StringComparison.OrdinalIgnoreCase))
                 {
-                    string[] fields = line.Split('|');
-
-                    if (fields.Length > 0 &&
-                        fields[0].Trim().ToUpper() == animalID)
-                    {
-                        MessageBox.Show("This Animal ID already exists.");
-                        txtAnimalID.Focus();
-                        return;
-                    }
+                    MessageBox.Show("This Animal ID already exists.");
+                    txtAnimalID.Focus();
+                    return;
                 }
             }
 
-            // Calculate the animal's status and housing unit.
-            string status;
-            string housingUnit;
+            // Create the animal and calculate its status and housing.
+            Animal newAnimal = new Animal(
+                animalID,
+                name,
+                species,
+                age,
+                score,
+                "",
+                "");
 
-            if (score <= 19)
-            {
-                status = "Critical";
-                housingUnit = "Intensive Care Unit";
-            }
-            else if (score <= 39)
-            {
-                status = "Serious";
-                housingUnit = "High-Dependency Ward";
-            }
-            else if (score <= 59)
-            {
-                status = "Stable";
-                housingUnit = "Recovery Ward";
-            }
-            else if (score <= 79)
-            {
-                status = "Recovering";
-                housingUnit = "Outdoor Enclosure";
-            }
-            else
-            {
-                status = "Release-Ready";
-                housingUnit = "Pre-Release Camp";
-            }
+            newAnimal.SetRecoveryScore(score);
 
-            // Save exactly seven fields in the required order.
-            string record = animalID + "|" +
-                            name + "|" +
-                            species + "|" +
-                            age + "|" +
-                            score + "|" +
-                            status + "|" +
-                            housingUnit;
-
-            File.AppendAllText(FilePath, record + Environment.NewLine);
+            // Save the animal using the required seven-field format.
+            repository.SaveAnimal(newAnimal);
 
             MessageBox.Show("Animal added successfully!");
 
-            // Clear the form for the next animal.
             txtAnimalID.Clear();
             txtName.Clear();
             txtSpecies.Clear();
@@ -268,21 +230,19 @@ namespace WildLifeRehabilitationCenter
 
         private void UpdateAnimal()
         {
-            string animalID;
-            string name;
-            string species;
-            int age;
-            int score;
-
-            if (!ValidateAnimal(
-                out animalID, out name, out species, out age, out score))
-            {
-                return;
-            }
-
             if (_animalToEdit == null)
             {
                 MessageBox.Show("No animal was selected to update.");
+                return;
+            }
+
+            if (!ValidateAnimal(
+                out string animalID,
+                out string name,
+                out string species,
+                out int age,
+                out int score))
+            {
                 return;
             }
 

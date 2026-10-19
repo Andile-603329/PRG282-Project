@@ -17,19 +17,15 @@ namespace WildLifeRehabilitationCenter.Data
         public DateTime DateAdmitted { get; init; }
         public int RecoveryScore { get; set; }
 
-        public void SetRecoveryScore(int Value)
-        {
-            if(Value >= 0)
-            {
-                RecoveryScore = Value;
-            }
-            else
-            {
-                //Exception here 
-            }
-        }
+        public string HousingUnit { get; set;}
 
-        public Animal(string animalID,string name,string species, int? age, string gender,DateTime dateAdmitted)
+        
+           
+ 
+
+        
+
+        public Animal(string animalID,string name,string species, int? age, string gender,DateTime dateAdmitted,int recoveryScore,string housingUnit)
         {
             AnimalID = animalID;
             Name = name;
@@ -37,7 +33,11 @@ namespace WildLifeRehabilitationCenter.Data
             Gender = gender;
             DateAdmitted = dateAdmitted;
             Species = species;
+            HousingUnit = housingUnit;
+            RecoveryScore = recoveryScore;
         }
+
+        
 
 
 

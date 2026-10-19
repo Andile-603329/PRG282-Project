@@ -18,6 +18,7 @@ namespace WildLifeRehabilitationCenter
         private bool _isEditMode => _animalToEdit != null;
 
         private readonly AnimalRepository repository = new AnimalRepository();
+
         public AddAnimalForm()
         {
             InitializeComponent();
@@ -35,16 +36,16 @@ namespace WildLifeRehabilitationCenter
             if (_isEditMode)
             {
                 this.Text = "Edit Animal"; // Change window title
+                btnAddAnimal.Text = "Update Animal"; // Change button text
 
                 txtAnimalID.Text = _animalToEdit.AnimalID;
-                txtAnimalID.Enabled = false; // Lock ID so it can't be modified
+                txtAnimalID.Enabled = false;
 
                 txtName.Text = _animalToEdit.Name;
                 txtSpecies.Text = _animalToEdit.Species;
                 cmbGender.Text = _animalToEdit.Gender;
                 txtAge.Text = _animalToEdit.Age?.ToString() ?? "";
                 txtRecoveryScore.Text = _animalToEdit.RecoveryScore.ToString();
-                // DateAdmitted, etc.
             }
         }
 
@@ -77,6 +78,36 @@ namespace WildLifeRehabilitationCenter
         }
 
         private void btnAddAnimal_Click(object sender, EventArgs e)
+        {
+            if (_isEditMode)
+            {
+                // Update the existing animal
+                UpdateAnimal();
+            }
+            else
+            {
+                // Add a new animal
+                AddNewAnimal();
+            }
+        }
+
+        private void UpdateAnimal()
+        {
+            // Update the properties of the existing object in memory
+            _animalToEdit.Name = txtName.Text;
+            _animalToEdit.Species = txtSpecies.Text;
+            _animalToEdit.Gender = cmbGender.Text;
+            _animalToEdit.Age = string.IsNullOrEmpty(txtAge.Text) ? (int?)null : int.Parse(txtAge.Text);
+            _animalToEdit.SetRecoveryScore(int.Parse(txtRecoveryScore.Text));
+            // Call your Update service
+            AnimalService service = new AnimalService();
+            service.UpdateAnimal(_animalToEdit);
+            MessageBox.Show("Animal updated successfully!");
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void AddNewAnimal()
         {
             // Get the information entered by the user
             string animalID = txtAnimalID.Text.Trim().ToUpper();

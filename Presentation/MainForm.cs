@@ -33,12 +33,17 @@ namespace WildLifeRehabilitationCenter.Presentation
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
+            AnimalRepository AnimalRepo = new AnimalRepository();
+            dgvAnimals.DataSource = AnimalRepo.GetAllAnimals();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             AddAnimalForm addForm = new AddAnimalForm();
-            addForm.ShowDialog();
+            if (addForm.ShowDialog() == DialogResult.OK)
+            {
+                RefreshAnimalGrid();
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -56,7 +61,7 @@ namespace WildLifeRehabilitationCenter.Presentation
                     AnimalService service = new AnimalService();
                     service.DeleteAnimal(selectedAnimal.AnimalID);
 
-                    dgvAnimals.Refresh();
+                    RefreshAnimalGrid();
                 }
             }
             else
@@ -75,7 +80,7 @@ namespace WildLifeRehabilitationCenter.Presentation
                 {
                     if (editForm.ShowDialog() == DialogResult.OK)
                     {
-                        dgvAnimals.Refresh();
+                        RefreshAnimalGrid();
                     }
                 }
             }
@@ -83,6 +88,13 @@ namespace WildLifeRehabilitationCenter.Presentation
             {
                 MessageBox.Show("Please select an animal row to edit.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void RefreshAnimalGrid()
+        {
+            AnimalRepository AnimalRepo = new AnimalRepository();
+            dgvAnimals.DataSource = null;
+            dgvAnimals.DataSource = AnimalRepo.GetAllAnimals();
         }
     }
 }

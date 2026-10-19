@@ -32,11 +32,11 @@
             ViewAnimals = new GroupBox();
             textBox1 = new TextBox();
             lblSearch = new Label();
+            dgvAnimals = new DataGridView();
             DeleteAnimal = new GroupBox();
             btnDelete = new Button();
             lblDeleteSelected = new Label();
             lblSlectedAnimal2 = new Label();
-            dgvAnimals = new DataGridView();
             AnimalSummary = new GroupBox();
             richTextBox1 = new RichTextBox();
             label1 = new Label();
@@ -44,11 +44,11 @@
             label2 = new Label();
             btnEdit = new Button();
             AddEditComponents = new GroupBox();
-            lblAnimalID = new Label();
             lblEditSelected = new Label();
+            lblAnimalID = new Label();
             ViewAnimals.SuspendLayout();
-            DeleteAnimal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
+            DeleteAnimal.SuspendLayout();
             AnimalSummary.SuspendLayout();
             groupBox1.SuspendLayout();
             AddEditComponents.SuspendLayout();
@@ -96,6 +96,18 @@
             lblSearch.TabIndex = 1;
             lblSearch.Text = "Search";
             // 
+            // dgvAnimals
+            // 
+            dgvAnimals.AllowUserToOrderColumns = true;
+            dgvAnimals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvAnimals.Location = new Point(37, 88);
+            dgvAnimals.Margin = new Padding(3, 2, 3, 2);
+            dgvAnimals.Name = "dgvAnimals";
+            dgvAnimals.RowHeadersWidth = 51;
+            dgvAnimals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvAnimals.Size = new Size(881, 409);
+            dgvAnimals.TabIndex = 0;
+            // 
             // DeleteAnimal
             // 
             DeleteAnimal.Controls.Add(btnDelete);
@@ -138,17 +150,6 @@
             lblSlectedAnimal2.Size = new Size(95, 15);
             lblSlectedAnimal2.TabIndex = 3;
             lblSlectedAnimal2.Text = "Animal Selected:";
-            // 
-            // dgvAnimals
-            // 
-            dgvAnimals.AllowUserToOrderColumns = true;
-            dgvAnimals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAnimals.Location = new Point(37, 88);
-            dgvAnimals.Margin = new Padding(3, 2, 3, 2);
-            dgvAnimals.Name = "dgvAnimals";
-            dgvAnimals.RowHeadersWidth = 51;
-            dgvAnimals.Size = new Size(881, 409);
-            dgvAnimals.TabIndex = 0;
             // 
             // AnimalSummary
             // 
@@ -227,15 +228,6 @@
             AddEditComponents.TabStop = false;
             AddEditComponents.Text = "Edit Animals";
             // 
-            // lblAnimalID
-            // 
-            lblAnimalID.AutoSize = true;
-            lblAnimalID.Location = new Point(32, 30);
-            lblAnimalID.Name = "lblAnimalID";
-            lblAnimalID.Size = new Size(95, 15);
-            lblAnimalID.TabIndex = 0;
-            lblAnimalID.Text = "Animal Selected:";
-            // 
             // lblEditSelected
             // 
             lblEditSelected.AutoSize = true;
@@ -245,11 +237,20 @@
             lblEditSelected.TabIndex = 19;
             lblEditSelected.Text = "None";
             // 
+            // lblAnimalID
+            // 
+            lblAnimalID.AutoSize = true;
+            lblAnimalID.Location = new Point(32, 30);
+            lblAnimalID.Name = "lblAnimalID";
+            lblAnimalID.Size = new Size(95, 15);
+            lblAnimalID.TabIndex = 0;
+            lblAnimalID.Text = "Animal Selected:";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1822, 769);
+            ClientSize = new Size(1408, 552);
             Controls.Add(groupBox1);
             Controls.Add(label1);
             Controls.Add(DeleteAnimal);
@@ -261,9 +262,9 @@
             Text = "Baobab Ridge Wildlife Rehabilitation Records System";
             ViewAnimals.ResumeLayout(false);
             ViewAnimals.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvAnimals).EndInit();
             DeleteAnimal.ResumeLayout(false);
             DeleteAnimal.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvAnimals).EndInit();
             AnimalSummary.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

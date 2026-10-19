@@ -45,7 +45,7 @@ namespace WildLifeRehabilitationCenter
                 txtSpecies.Text = _animalToEdit.Species;
                 cmbGender.Text = _animalToEdit.Gender;
                 txtAge.Text = _animalToEdit.Age?.ToString() ?? "";
-                txtRecoveryScore.Text = _animalToEdit.RecoveryScore.ToString();
+                cmbHousingUnit.Text = _animalToEdit.HousingUnit;
             }
         }
 
@@ -98,7 +98,7 @@ namespace WildLifeRehabilitationCenter
             _animalToEdit.Species = txtSpecies.Text;
             _animalToEdit.Gender = cmbGender.Text;
             _animalToEdit.Age = string.IsNullOrEmpty(txtAge.Text) ? (int?)null : int.Parse(txtAge.Text);
-            _animalToEdit.SetRecoveryScore(int.Parse(txtRecoveryScore.Text));
+            _animalToEdit.HousingUnit = cmbHousingUnit.Text;
             // Call your Update service
             AnimalService service = new AnimalService();
             service.UpdateAnimal(_animalToEdit);
@@ -245,7 +245,7 @@ namespace WildLifeRehabilitationCenter
                 txtSpecies.Clear();
                 txtAge.Clear();
                 cmbGender.SelectedIndex = -1;
-                txtRecoveryScore.Clear();
+                cmbHousingUnit.SelectedIndex = -1;
 
                 lblStatus.Text = "Status: Not calculated";
                 lblHousingUnit.Text = "Housing Unit: Not calculated";

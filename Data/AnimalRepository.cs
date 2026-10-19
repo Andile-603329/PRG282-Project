@@ -1,10 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
 using System.Data;
+using System.IO;
+using System.Linq;
 
 namespace WildLifeRehabilitationCenter.Data
 {
@@ -14,29 +12,20 @@ namespace WildLifeRehabilitationCenter.Data
 
         public void SaveAnimal(Animal animal)
         {
-            string line;
             try
             {
-                var Age = animal.Age;
-                if (Age == null)
+                string ageValue = animal.Age.HasValue
+                    ? animal.Age.Value.ToString()
+                    : "";
+
+                string line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{ageValue}|{animal.RecoveryScore}|{animal.Status}|{animal.HousingUnit}";
+
+                using (StreamWriter writer = new StreamWriter(fileName, true))
                 {
-                    string AgeValue = "";
-                    line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{AgeValue}|{animal.Gender}|{animal.DateAdmitted}|{animal.RecoveryScore}";
-                    using (StreamWriter writer = new StreamWriter(fileName,append:true))
-                    {
-                        writer.WriteLine(line);
-                    }
-                }
-                else
-                {
-                    line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{animal.Age}|{animal.Gender}|{animal.DateAdmitted}|{animal.RecoveryScore}";
-                    using (StreamWriter writer = new StreamWriter(fileName,append:true))
-                    {
-                        writer.WriteLine(line);
-                    }
+                    writer.WriteLine(line);
                 }
             }
-            catch(IOException ex)
+            catch (IOException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -45,90 +34,81 @@ namespace WildLifeRehabilitationCenter.Data
         public List<Animal> GetAllAnimals()
         {
             List<Animal> animals = new List<Animal>();
+
+            if (!File.Exists(fileName))
+            {
+                return animals;
+            }
+
             try
             {
-                if (!File.Exists(fileName))
-                {
-                    //Error handling
-                    return animals;
-                }
-
                 using (StreamReader reader = new StreamReader(fileName))
                 {
                     string? line;
-                    while((line = reader.ReadLine()) != null)
+
+                    while ((line = reader.ReadLine()) != null)
                     {
-                        string[] properties = line.Split("|");
+                        string[] fields = line.Split('|');
 
-                        if(properties.Length != 7)
+                        if (fields.Length != 7)
                         {
                             continue;
-                            //skipping bad line, all lines should have 7 properties
-                        }
-                        string AnimalID = properties[0];
-                        string Name = properties[1];
-                        string Species = properties[2];
-                        int Age;
-                        int? AgeValue;
-                        if (int.TryParse(properties[3], out Age))
-                        {
-                            AgeValue = Age;
-                        }
-                        else
-                        {
-                            AgeValue = null;
                         }
 
-                        string Gender = properties[4];
-                        DateTime DateAdmitted;
-                        if (DateTime.TryParse(properties[5], out DateAdmitted))
+                        int? age = null;
+
+                        if (fields[3] != "")
                         {
-                            //date parsed successfully
+                            if (int.TryParse(fields[3], out int parsedAge))
+                            {
+                                age = parsedAge;
+                            }
+                            else
+                            {
+                                continue;
+                            }
                         }
-                        else{
+
+                        if (!int.TryParse(fields[4], out int score))
+                        {
                             continue;
-                            //skipping bad line
                         }
-                        int recoveryScore;
-                        if (int.TryParse(properties[6], out recoveryScore))
-                        {
-                            //score parsed successfully
-                        }
-                        else
-                        {
-                            continue;
-                            //skip bad line
-                        }
-                        
-                        Animal animal = new Animal(AnimalID, Name, Species, AgeValue, Gender, DateAdmitted)
-                        {
-                            RecoveryScore = recoveryScore
-                        };
+
+                        Animal animal = new Animal(
+                            fields[0],
+                            fields[1],
+                            fields[2],
+                            age,
+                            score,
+                            fields[5],
+                            fields[6]);
+
                         animals.Add(animal);
-
-                       
                     }
                 }
-                
             }
-            catch
+            catch (IOException ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
-            return animals;
 
+            return animals;
         }
 
         public void SaveAllAnimals(List<Animal> animals)
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(fileName, append: false))
+                using (StreamWriter writer = new StreamWriter(fileName, false))
                 {
-                    foreach (var animal in animals)
+                    foreach (Animal animal in animals)
                     {
-                        string ageValue = animal.Age.HasValue ? animal.Age.Value.ToString() : "";
-                        string line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{ageValue}|{animal.Gender}|{animal.DateAdmitted}|{animal.RecoveryScore}";
+                        string ageValue = animal.Age.HasValue
+                            ? animal.Age.Value.ToString()
+                            : "";
+
+                        string line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{ageValue}|{animal.RecoveryScore}|{animal.Status}|{animal.HousingUnit}";
+
                         writer.WriteLine(line);
                     }
                 }
@@ -139,30 +119,31 @@ namespace WildLifeRehabilitationCenter.Data
             }
         }
 
-        //source for the datagridview
-
-        public DataTable LoadAnimals(List<Animal> List)
+        public DataTable LoadAnimals(List<Animal> animals)
         {
             DataTable table = new DataTable();
-            var properties = typeof(Animal).GetProperties();
 
-            foreach (var property in properties)
+            table.Columns.Add("AnimalID");
+            table.Columns.Add("Name");
+            table.Columns.Add("Species");
+            table.Columns.Add("Age");
+            table.Columns.Add("RecoveryScore");
+            table.Columns.Add("Status");
+            table.Columns.Add("HousingUnit");
+
+            foreach (Animal animal in animals)
             {
-                table.Columns.Add(property.Name, Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType);
+                table.Rows.Add(
+                    animal.AnimalID,
+                    animal.Name,
+                    animal.Species,
+                    animal.Age.HasValue ? animal.Age.Value.ToString() : "",
+                    animal.RecoveryScore,
+                    animal.Status,
+                    animal.HousingUnit);
             }
 
-            foreach (var item in List)
-            {
-                var values = new object[properties.Length];
-                for (int i = 0; i < properties.Length; i++)
-                {
-                    values[i] = properties[i].GetValue(item, null);
-                }
-                table.Rows.Add(values);
-
-            }
             return table;
         }
-
     }
 }

@@ -47,15 +47,16 @@
             btnAddAnimal = new Button();
             btnCancel = new Button();
             contextMenuStrip1 = new ContextMenuStrip(components);
+            cmbHousingUnit = new ComboBox();
             SuspendLayout();
             // 
             // lblTitle
             // 
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Segoe UI", 16F);
-            lblTitle.Location = new Point(245, 21);
+            lblTitle.Location = new Point(280, 28);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(175, 30);
+            lblTitle.Size = new Size(217, 37);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Add New Animal";
             lblTitle.Click += label1_Click;
@@ -63,87 +64,83 @@
             // lblAnimalId
             // 
             lblAnimalId.AutoSize = true;
-            lblAnimalId.Location = new Point(46, 89);
+            lblAnimalId.Location = new Point(53, 119);
             lblAnimalId.Name = "lblAnimalId";
-            lblAnimalId.Size = new Size(59, 15);
+            lblAnimalId.Size = new Size(75, 20);
             lblAnimalId.TabIndex = 1;
             lblAnimalId.Text = "Animal ID";
             // 
             // txtAnimalID
             // 
-            txtAnimalID.Location = new Point(145, 89);
-            txtAnimalID.Margin = new Padding(3, 2, 3, 2);
+            txtAnimalID.Location = new Point(166, 119);
             txtAnimalID.Name = "txtAnimalID";
-            txtAnimalID.Size = new Size(212, 23);
+            txtAnimalID.Size = new Size(242, 27);
             txtAnimalID.TabIndex = 2;
             // 
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(46, 137);
+            lblName.Location = new Point(53, 183);
             lblName.Name = "lblName";
-            lblName.Size = new Size(39, 15);
+            lblName.Size = new Size(49, 20);
             lblName.TabIndex = 3;
             lblName.Text = "Name";
             // 
             // lblSpecies
             // 
             lblSpecies.AutoSize = true;
-            lblSpecies.Location = new Point(46, 181);
+            lblSpecies.Location = new Point(53, 241);
             lblSpecies.Name = "lblSpecies";
-            lblSpecies.Size = new Size(46, 15);
+            lblSpecies.Size = new Size(59, 20);
             lblSpecies.TabIndex = 4;
             lblSpecies.Text = "Species";
             // 
             // lblAge
             // 
             lblAge.AutoSize = true;
-            lblAge.Location = new Point(43, 225);
+            lblAge.Location = new Point(49, 300);
             lblAge.Name = "lblAge";
-            lblAge.Size = new Size(28, 15);
+            lblAge.Size = new Size(36, 20);
             lblAge.TabIndex = 5;
             lblAge.Text = "Age";
             // 
             // lblGender
             // 
             lblGender.AutoSize = true;
-            lblGender.Location = new Point(46, 275);
+            lblGender.Location = new Point(53, 367);
             lblGender.Name = "lblGender";
-            lblGender.Size = new Size(45, 15);
+            lblGender.Size = new Size(57, 20);
             lblGender.TabIndex = 6;
             lblGender.Text = "Gender";
             // 
             // lblRecoveryScore
             // 
             lblRecoveryScore.AutoSize = true;
-            lblRecoveryScore.Location = new Point(46, 320);
+            lblRecoveryScore.Location = new Point(53, 427);
             lblRecoveryScore.Name = "lblRecoveryScore";
-            lblRecoveryScore.Size = new Size(87, 15);
+            lblRecoveryScore.Size = new Size(110, 20);
             lblRecoveryScore.TabIndex = 7;
             lblRecoveryScore.Text = "Recovery Score";
             // 
             // txtName
             // 
-            txtName.Location = new Point(145, 137);
-            txtName.Margin = new Padding(3, 2, 3, 2);
+            txtName.Location = new Point(166, 183);
             txtName.Name = "txtName";
-            txtName.Size = new Size(212, 23);
+            txtName.Size = new Size(242, 27);
             txtName.TabIndex = 8;
             // 
             // txtSpecies
             // 
-            txtSpecies.Location = new Point(145, 181);
-            txtSpecies.Margin = new Padding(3, 2, 3, 2);
+            txtSpecies.Location = new Point(166, 241);
             txtSpecies.Name = "txtSpecies";
-            txtSpecies.Size = new Size(212, 23);
+            txtSpecies.Size = new Size(242, 27);
             txtSpecies.TabIndex = 9;
             // 
             // txtAge
             // 
-            txtAge.Location = new Point(145, 223);
-            txtAge.Margin = new Padding(3, 2, 3, 2);
+            txtAge.Location = new Point(166, 297);
             txtAge.Name = "txtAge";
-            txtAge.Size = new Size(212, 23);
+            txtAge.Size = new Size(242, 27);
             txtAge.TabIndex = 10;
             // 
             // cmbGender
@@ -151,45 +148,42 @@
             cmbGender.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbGender.FormattingEnabled = true;
             cmbGender.Items.AddRange(new object[] { "Female", "Male" });
-            cmbGender.Location = new Point(145, 275);
-            cmbGender.Margin = new Padding(3, 2, 3, 2);
+            cmbGender.Location = new Point(166, 367);
             cmbGender.Name = "cmbGender";
-            cmbGender.Size = new Size(212, 23);
+            cmbGender.Size = new Size(242, 28);
             cmbGender.TabIndex = 11;
             // 
             // txtRecoveryScore
             // 
-            txtRecoveryScore.Location = new Point(145, 320);
-            txtRecoveryScore.Margin = new Padding(3, 2, 3, 2);
+            txtRecoveryScore.Location = new Point(166, 427);
             txtRecoveryScore.Name = "txtRecoveryScore";
-            txtRecoveryScore.Size = new Size(212, 23);
+            txtRecoveryScore.Size = new Size(242, 27);
             txtRecoveryScore.TabIndex = 12;
             txtRecoveryScore.TextChanged += txtRecoveryScore_TextChanged;
             // 
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(58, 370);
+            lblStatus.Location = new Point(53, 519);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(122, 15);
+            lblStatus.Size = new Size(153, 20);
             lblStatus.TabIndex = 13;
             lblStatus.Text = "Status: Not calculated";
             // 
             // lblHousingUnit
             // 
             lblHousingUnit.AutoSize = true;
-            lblHousingUnit.Location = new Point(58, 399);
+            lblHousingUnit.Location = new Point(53, 480);
             lblHousingUnit.Name = "lblHousingUnit";
-            lblHousingUnit.Size = new Size(160, 15);
+            lblHousingUnit.Size = new Size(95, 20);
             lblHousingUnit.TabIndex = 14;
-            lblHousingUnit.Text = "Housing Unit: Not calculated";
+            lblHousingUnit.Text = "Housing Unit";
             // 
             // btnAddAnimal
             // 
-            btnAddAnimal.Location = new Point(223, 429);
-            btnAddAnimal.Margin = new Padding(3, 2, 3, 2);
+            btnAddAnimal.Location = new Point(255, 572);
             btnAddAnimal.Name = "btnAddAnimal";
-            btnAddAnimal.Size = new Size(100, 22);
+            btnAddAnimal.Size = new Size(114, 29);
             btnAddAnimal.TabIndex = 15;
             btnAddAnimal.Text = "Add Animal";
             btnAddAnimal.UseVisualStyleBackColor = true;
@@ -197,10 +191,9 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(353, 429);
-            btnCancel.Margin = new Padding(3, 2, 3, 2);
+            btnCancel.Location = new Point(403, 572);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(91, 22);
+            btnCancel.Size = new Size(104, 29);
             btnCancel.TabIndex = 16;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -212,11 +205,21 @@
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
             // 
+            // cmbHousingUnit
+            // 
+            cmbHousingUnit.FormattingEnabled = true;
+            cmbHousingUnit.Items.AddRange(new object[] { "Intensive Care Unit", "High-Dependency Ward", "Recovery ward", "Outdoor Enclosure", "Pre-Release Camp" });
+            cmbHousingUnit.Location = new Point(166, 477);
+            cmbHousingUnit.Name = "cmbHousingUnit";
+            cmbHousingUnit.Size = new Size(242, 28);
+            cmbHousingUnit.TabIndex = 17;
+            // 
             // AddAnimalForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(684, 452);
+            ClientSize = new Size(782, 603);
+            Controls.Add(cmbHousingUnit);
             Controls.Add(btnCancel);
             Controls.Add(btnAddAnimal);
             Controls.Add(lblHousingUnit);
@@ -234,7 +237,6 @@
             Controls.Add(txtAnimalID);
             Controls.Add(lblAnimalId);
             Controls.Add(lblTitle);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "AddAnimalForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Add New Animal";
@@ -263,5 +265,6 @@
         private Button btnAddAnimal;
         private Button btnCancel;
         private ContextMenuStrip contextMenuStrip1;
+        private ComboBox cmbHousingUnit;
     }
 }

@@ -12,6 +12,14 @@ namespace WildLifeRehabilitationCenter.Presentation
         {
             InitializeComponent();
             AnimalRepository AnimalRepo = new AnimalRepository();
+            var animals = new List<Animal>()
+{
+           new Animal("WR-0001", "Kiki", "Parrot",5, "Female", DateTime.Now,43,"Recovery Ward"),
+           new Animal("WR-0987", "Max", "Dog", null,"Male", DateTime.Now,16,"Intensive Care Unit")
+};
+
+            AnimalRepo.SeedAnimals(animals);
+
             List<Animal> List = AnimalRepo.GetAllAnimals();
             dgvAnimals.DataSource = AnimalRepo.LoadAnimals(List);
             

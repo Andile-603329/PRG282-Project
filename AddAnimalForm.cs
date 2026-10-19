@@ -69,37 +69,10 @@ namespace WildLifeRehabilitationCenter
                 lblHousingUnit.Text = "Housing Unit: Not calculated";
                 return;
             }
-
-            // Check if the score is between 0 and 100
-            if (score < 0 || score > 100)
-            {
-                lblStatus.Text = "Status: Invalid score";
-                lblHousingUnit.Text = "Housing Unit: Invalid score";
-            }
-            else if (score <= 19)
-            {
-                lblStatus.Text = "Status: Critical";
-                lblHousingUnit.Text = "Housing Unit: Intensive Care Unit";
-            }
-            else if (score <= 39)
-            {
-                lblStatus.Text = "Status: Serious";
-                lblHousingUnit.Text = "Housing Unit: High-Dependency Ward";
-            }
-            else if (score <= 59)
-            {
-                lblStatus.Text = "Status: Stable";
-                lblHousingUnit.Text = "Housing Unit: Recovery Ward";
-            }
-            else if (score <= 79)
-            {
-                lblStatus.Text = "Status: Recovering";
-                lblHousingUnit.Text = "Housing Unit: Outdoor Enclosure";
-            }
             else
             {
-                lblStatus.Text = "Status: Release-Ready";
-                lblHousingUnit.Text = "Housing Unit: Pre-Release Camp";
+                AnimalService service = new AnimalService();
+                lblStatus.Text = service.ClassifyAnimal(score);
             }
         }
 
@@ -112,6 +85,7 @@ namespace WildLifeRehabilitationCenter
             string gender = cmbGender.Text;
             int age;
             int score;
+            string HousingUnit = cmbHousingUnit.Text;
 
             // Check the Animal ID
             if (!animalID.StartsWith("WR-") || animalID.Length != 7)
@@ -182,6 +156,9 @@ namespace WildLifeRehabilitationCenter
                 return;
             }
 
+            
+            
+
             // Check whether the Animal ID already exists
             List<Animal> animals = repository.GetAllAnimals();
 
@@ -205,7 +182,8 @@ namespace WildLifeRehabilitationCenter
                 _animalToEdit.Species = txtSpecies.Text;
                 _animalToEdit.Gender = cmbGender.Text;
                 _animalToEdit.Age = string.IsNullOrEmpty(txtAge.Text) ? (int?)null : int.Parse(txtAge.Text);
-                _animalToEdit.SetRecoveryScore(int.Parse(txtRecoveryScore.Text));
+                _animalToEdit.RecoveryScore = int.Parse(txtRecoveryScore.Text);
+                _animalToEdit.HousingUnit = cmbHousingUnit.Text;
 
                 // Call your Update service
                 AnimalService service = new AnimalService();
@@ -220,10 +198,10 @@ namespace WildLifeRehabilitationCenter
                     species,
                     age,
                     gender,
-                    DateTime.Now)
-                {
-                    RecoveryScore = score
-                };
+                    DateTime.Now,
+                    score,
+                    HousingUnit
+                    );
 
                 // Save the animal
                 repository.SaveAnimal(newAnimal);

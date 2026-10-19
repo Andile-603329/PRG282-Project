@@ -12,6 +12,29 @@ namespace WildLifeRehabilitationCenter.Data
     {
         private readonly string fileName = "Animals.txt";
 
+
+        //Seed Data
+        public void SeedAnimals(List<Animal> animals)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(fileName, append: false))
+                {
+                    foreach (var animal in animals)
+                    {
+                        string ageValue = animal.Age.HasValue ? animal.Age.Value.ToString() : "";
+                        string line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{ageValue}|{animal.Gender}|{animal.DateAdmitted}|{animal.RecoveryScore}|{animal.HousingUnit}";
+                        writer.WriteLine(line);
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"File error: {ex.Message}");
+            }
+        }
+
+
         public void SaveAnimal(Animal animal)
         {
             string line;
@@ -21,7 +44,7 @@ namespace WildLifeRehabilitationCenter.Data
                 if (Age == null)
                 {
                     string AgeValue = "";
-                    line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{AgeValue}|{animal.Gender}|{animal.DateAdmitted}|{animal.RecoveryScore}";
+                    line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{AgeValue}|{animal.Gender}|{animal.DateAdmitted}|{animal.HousingUnit}|{animal.RecoveryScore}|{animal.HousingUnit}";
                     using (StreamWriter writer = new StreamWriter(fileName,append:true))
                     {
                         writer.WriteLine(line);
@@ -29,7 +52,7 @@ namespace WildLifeRehabilitationCenter.Data
                 }
                 else
                 {
-                    line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{animal.Age}|{animal.Gender}|{animal.DateAdmitted}|{animal.RecoveryScore}";
+                    line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{animal.Age}|{animal.Gender}|{animal.DateAdmitted}|{animal.RecoveryScore}|{animal.HousingUnit}";
                     using (StreamWriter writer = new StreamWriter(fileName,append:true))
                     {
                         writer.WriteLine(line);
@@ -60,7 +83,7 @@ namespace WildLifeRehabilitationCenter.Data
                     {
                         string[] properties = line.Split("|");
 
-                        if(properties.Length != 7)
+                        if(properties.Length != 8)
                         {
                             continue;
                             //skipping bad line, all lines should have 7 properties
@@ -70,6 +93,8 @@ namespace WildLifeRehabilitationCenter.Data
                         string Species = properties[2];
                         int Age;
                         int? AgeValue;
+
+                        string HousingUnit = properties[7];
                         if (int.TryParse(properties[3], out Age))
                         {
                             AgeValue = Age;
@@ -78,7 +103,7 @@ namespace WildLifeRehabilitationCenter.Data
                         {
                             AgeValue = null;
                         }
-
+                        
                         string Gender = properties[4];
                         DateTime DateAdmitted;
                         if (DateTime.TryParse(properties[5], out DateAdmitted))
@@ -100,10 +125,9 @@ namespace WildLifeRehabilitationCenter.Data
                             //skip bad line
                         }
                         
-                        Animal animal = new Animal(AnimalID, Name, Species, AgeValue, Gender, DateAdmitted)
-                        {
-                            RecoveryScore = recoveryScore
-                        };
+                        
+                            Animal animal = new Animal(AnimalID, Name, Species, AgeValue, Gender, DateAdmitted, recoveryScore, HousingUnit);
+                        
                         animals.Add(animal);
 
                        
@@ -128,7 +152,7 @@ namespace WildLifeRehabilitationCenter.Data
                     foreach (var animal in animals)
                     {
                         string ageValue = animal.Age.HasValue ? animal.Age.Value.ToString() : "";
-                        string line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{ageValue}|{animal.Gender}|{animal.DateAdmitted}|{animal.RecoveryScore}";
+                        string line = $"{animal.AnimalID}|{animal.Name}|{animal.Species}|{ageValue}|{animal.Gender}|{animal.DateAdmitted}|{animal.RecoveryScore}|{animal.HousingUnit}";
                         writer.WriteLine(line);
                     }
                 }

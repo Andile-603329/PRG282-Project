@@ -379,7 +379,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1822, 660);
+            ClientSize = new Size(1822, 769);
             Controls.Add(groupBox1);
             Controls.Add(label1);
             Controls.Add(DeleteAnimal);

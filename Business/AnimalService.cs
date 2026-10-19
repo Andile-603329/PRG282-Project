@@ -9,6 +9,10 @@ namespace WildLifeRehabilitationCenter.Business
 	{
 		private readonly AnimalRepository _repository = new AnimalRepository();
 
+
+         
+
+
 		public void UpdateAnimal(Animal updatedAnimal)
 		{
 			var animals = _repository.GetAllAnimals();
@@ -21,12 +25,51 @@ namespace WildLifeRehabilitationCenter.Business
 				existingAnimal.Species = updatedAnimal.Species;
 				existingAnimal.Age = updatedAnimal.Age;
 				existingAnimal.Gender = updatedAnimal.Gender;
-				existingAnimal.SetRecoveryScore(updatedAnimal.RecoveryScore);
+				existingAnimal.RecoveryScore = updatedAnimal.RecoveryScore;
+				existingAnimal.HousingUnit = updatedAnimal.HousingUnit;
 
-				//Rewrite file.
-				_repository.SaveAllAnimals(animals);
+                //Rewrite file.
+                _repository.SaveAllAnimals(animals);
             }
         }
+
+		public string ClassifyAnimal(int score)
+		{
+			
+			if(score < 0 || score > 100)
+			{
+				return "Invalid Data, could not classify recovery status";
+
+			}
+			else
+			{
+                if (score <= 19)
+                {
+                    return  "Status: Critical";
+               
+                }
+                else if (score <= 39)
+                {
+                    return "Status: Serious";
+                    
+                }
+                else if (score <= 59)
+                {
+                    return "Status: Stable";
+                  
+                }
+                else if (score <= 79)
+                {
+                    return "Status: Recovering";
+                    
+                }
+                else
+                {
+                    return "Status: Release-Ready";
+                    
+                }
+            }
+		}
 
 		public void DeleteAnimal(string animalId)
         {

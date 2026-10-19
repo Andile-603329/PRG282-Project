@@ -1,14 +1,18 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
 
 namespace WildLifeRehabilitationCenter.Data
 {
     public class AnimalRepository
     {
         private readonly string fileName = "Animals.txt";
+
+        public void SeedAnimals(List<Animal> animals)
+        {
+            SaveAllAnimals(animals);
+        }
 
         public void SaveAnimal(Animal animal)
         {
@@ -27,7 +31,7 @@ namespace WildLifeRehabilitationCenter.Data
             }
             catch (IOException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"File error: {ex.Message}");
             }
         }
 
@@ -89,7 +93,7 @@ namespace WildLifeRehabilitationCenter.Data
             }
             catch (IOException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"File error: {ex.Message}");
             }
 
             return animals;
@@ -115,7 +119,7 @@ namespace WildLifeRehabilitationCenter.Data
             }
             catch (IOException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"File error: {ex.Message}");
             }
         }
 

@@ -52,7 +52,8 @@
             lblSearch = new Label();
             dgvAnimals = new DataGridView();
             AnimalSummary = new GroupBox();
-            richTextBox1 = new RichTextBox();
+            btnGenerateSummary = new Button();
+            txtSummaryDisplay = new RichTextBox();
             DeleteAnimal = new GroupBox();
             btnDelete = new Button();
             lblSelectedAnimalName2 = new Label();
@@ -304,7 +305,8 @@
             // 
             // AnimalSummary
             // 
-            AnimalSummary.Controls.Add(richTextBox1);
+            AnimalSummary.Controls.Add(btnGenerateSummary);
+            AnimalSummary.Controls.Add(txtSummaryDisplay);
             AnimalSummary.Location = new Point(1137, 32);
             AnimalSummary.Margin = new Padding(3, 2, 3, 2);
             AnimalSummary.Name = "AnimalSummary";
@@ -314,16 +316,26 @@
             AnimalSummary.TabStop = false;
             AnimalSummary.Text = "Animal Summary";
             // 
-            // richTextBox1
+            // btnGenerateSummary
             // 
-            richTextBox1.Location = new Point(26, 48);
-            richTextBox1.Margin = new Padding(3, 2, 3, 2);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.ReadOnly = true;
-            richTextBox1.Size = new Size(349, 242);
-            richTextBox1.TabIndex = 0;
-            richTextBox1.Text = "";
-            richTextBox1.TextChanged += richTextBox1_TextChanged;
+            btnGenerateSummary.Location = new Point(264, 18);
+            btnGenerateSummary.Name = "btnGenerateSummary";
+            btnGenerateSummary.Size = new Size(101, 23);
+            btnGenerateSummary.TabIndex = 1;
+            btnGenerateSummary.Text = "Summary";
+            btnGenerateSummary.UseVisualStyleBackColor = true;
+            btnGenerateSummary.Click += btnGenerateSummary_Click;
+            // 
+            // txtSummaryDisplay
+            // 
+            txtSummaryDisplay.Location = new Point(26, 48);
+            txtSummaryDisplay.Margin = new Padding(3, 2, 3, 2);
+            txtSummaryDisplay.Name = "txtSummaryDisplay";
+            txtSummaryDisplay.ReadOnly = true;
+            txtSummaryDisplay.Size = new Size(349, 242);
+            txtSummaryDisplay.TabIndex = 0;
+            txtSummaryDisplay.Text = "";
+            txtSummaryDisplay.TextChanged += richTextBox1_TextChanged;
             // 
             // DeleteAnimal
             // 
@@ -454,7 +466,7 @@
         private Label lblSearch;
         private DataGridView dgvAnimals;
         private GroupBox AnimalSummary;
-        private RichTextBox richTextBox1;
+        private RichTextBox txtSummaryDisplay;
         private GroupBox DeleteAnimal;
         private Button btnDelete;
         private Label lblSelectedAnimalName2;
@@ -462,5 +474,6 @@
         private Label label1;
         private GroupBox groupBox1;
         private Label label2;
+        private Button btnGenerateSummary;
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Data;
 
 namespace WildLifeRehabilitationCenter.Data
 {
@@ -136,6 +137,31 @@ namespace WildLifeRehabilitationCenter.Data
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        //source for the datagridview
+
+        public DataTable LoadAnimals(List<Animal> List)
+        {
+            DataTable table = new DataTable();
+            var properties = typeof(Animal).GetProperties();
+
+            foreach (var property in properties)
+            {
+                table.Columns.Add(property.Name, Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType);
+            }
+
+            foreach (var item in List)
+            {
+                var values = new object[properties.Length];
+                for (int i = 0; i < properties.Length; i++)
+                {
+                    values[i] = properties[i].GetValue(item, null);
+                }
+                table.Rows.Add(values);
+
+            }
+            return table;
         }
 
     }

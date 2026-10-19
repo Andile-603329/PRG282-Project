@@ -108,29 +108,6 @@
             dgvAnimals.Size = new Size(881, 409);
             dgvAnimals.TabIndex = 0;
             // 
-            // AnimalSummary
-            // 
-            AnimalSummary.Controls.Add(richTextBox1);
-            AnimalSummary.Location = new Point(1137, 32);
-            AnimalSummary.Margin = new Padding(3, 2, 3, 2);
-            AnimalSummary.Name = "AnimalSummary";
-            AnimalSummary.Padding = new Padding(3, 2, 3, 2);
-            AnimalSummary.Size = new Size(400, 314);
-            AnimalSummary.TabIndex = 2;
-            AnimalSummary.TabStop = false;
-            AnimalSummary.Text = "Animal Summary";
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(26, 48);
-            richTextBox1.Margin = new Padding(3, 2, 3, 2);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.ReadOnly = true;
-            richTextBox1.Size = new Size(349, 242);
-            richTextBox1.TabIndex = 0;
-            richTextBox1.Text = "";
-            richTextBox1.TextChanged += richTextBox1_TextChanged;
-            // 
             // DeleteAnimal
             // 
             DeleteAnimal.Controls.Add(btnDelete);
@@ -304,7 +281,7 @@
         private Label lblSearch;
         private DataGridView dgvAnimals;
         private GroupBox AnimalSummary;
-        private RichTextBox txtSummaryDisplay;
+        private RichTextBox richTextBox1;
         private GroupBox DeleteAnimal;
         private Button btnDelete;
         private Label lblDeleteSelected;
@@ -312,5 +289,9 @@
         private Label label1;
         private GroupBox groupBox1;
         private Label label2;
+        private Button btnEdit;
+        private GroupBox AddEditComponents;
+        private Label lblAnimalID;
+        private Label lblEditSelected;
     }
 }

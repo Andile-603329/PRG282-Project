@@ -96,32 +96,5 @@ namespace WildLifeRehabilitationCenter.Presentation
             dgvAnimals.DataSource = null;
             dgvAnimals.DataSource = AnimalRepo.GetAllAnimals();
         }
-
-        private void btnGenerateSummary_Click(object sender, EventArgs e)
-        {
-            AnimalRepository animalRepository = new AnimalRepository();
-            SummaryService summaryService = new SummaryService();
-            SummaryFileRepository summaryFileRepository = new SummaryFileRepository();
-
-            // 1. Get all animals from animals.txt
-            List<Animal> animals = animalRepository.GetAllAnimals();
-
-            // 2. Do the calculations
-            SummaryResult result = summaryService.BuildSummary(animals);
-
-            // 3. Turn the results into the report text
-            string reportText = summaryFileRepository.BuildReportText(result, DateTime.Now);
-
-            // 4. Show the report on the form (the brief says a message box alone is not enough)
-            txtSummaryDisplay.Text = reportText;
-
-            // 5. Save to summary.txt, and warn the user if it failed
-            bool saved = summaryFileRepository.WriteSummary(reportText);
-            if (!saved)
-            {
-                MessageBox.Show("The summary could not be saved to summary.txt. Make sure the file is not open in another program or set to read-only.",
-                    "Save Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
     }
 }

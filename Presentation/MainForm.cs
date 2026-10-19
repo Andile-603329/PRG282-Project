@@ -13,7 +13,7 @@ namespace WildLifeRehabilitationCenter.Presentation
             InitializeComponent();
 
             AnimalRepository AnimalRepo = new AnimalRepository();
-            dgvAnimals.DataSource = AnimalRepo.GetAllAnimals();       
+            dgvAnimals.DataSource = AnimalRepo.GetAllAnimals();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace WildLifeRehabilitationCenter.Presentation
         {
             if (dgvAnimals.SelectedRows.Count > 0)
             {
-                var selectedAnimal  = (Animal)dgvAnimals.SelectedRows[0].DataBoundItem;
+                var selectedAnimal = (Animal)dgvAnimals.SelectedRows[0].DataBoundItem;
 
                 using (AddAnimalForm editForm = new AddAnimalForm(selectedAnimal))
                 {

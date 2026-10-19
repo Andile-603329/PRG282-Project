@@ -28,8 +28,8 @@ namespace WildLifeRehabilitationCenter.Business
 				existingAnimal.RecoveryScore = updatedAnimal.RecoveryScore;
 				existingAnimal.HousingUnit = updatedAnimal.HousingUnit;
 
-				//Rewrite file.
-				_repository.SaveAllAnimals(animals);
+                //Rewrite file.
+                _repository.SaveAllAnimals(animals);
             }
         }
 

@@ -48,7 +48,7 @@
             lblAnimalID = new Label();
             btnAdd = new Button();
             ViewAnimals = new GroupBox();
-            textBox1 = new TextBox();
+            txtSearch = new TextBox();
             lblSearch = new Label();
             dgvAnimals = new DataGridView();
             AnimalSummary = new GroupBox();
@@ -261,7 +261,7 @@
             // 
             // ViewAnimals
             // 
-            ViewAnimals.Controls.Add(textBox1);
+            ViewAnimals.Controls.Add(txtSearch);
             ViewAnimals.Controls.Add(lblSearch);
             ViewAnimals.Controls.Add(dgvAnimals);
             ViewAnimals.Location = new Point(452, 32);
@@ -273,13 +273,14 @@
             ViewAnimals.TabStop = false;
             ViewAnimals.Text = "View Animals";
             // 
-            // textBox1
+            // txtSearch
             // 
-            textBox1.Location = new Point(107, 48);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(110, 23);
-            textBox1.TabIndex = 2;
+            txtSearch.Location = new Point(107, 48);
+            txtSearch.Margin = new Padding(3, 2, 3, 2);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(110, 23);
+            txtSearch.TabIndex = 2;
+            txtSearch.KeyPress += txtSearch_KeyPress;
             // 
             // lblSearch
             // 
@@ -298,6 +299,7 @@
             dgvAnimals.Margin = new Padding(3, 2, 3, 2);
             dgvAnimals.Name = "dgvAnimals";
             dgvAnimals.RowHeadersWidth = 51;
+            dgvAnimals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvAnimals.Size = new Size(557, 326);
             dgvAnimals.TabIndex = 0;
             // 
@@ -448,7 +450,7 @@
         private Label lblSelectedAnimalName;
         private Label lblAnimalSelected;
         private GroupBox ViewAnimals;
-        private TextBox textBox1;
+        private TextBox txtSearch;
         private Label lblSearch;
         private DataGridView dgvAnimals;
         private GroupBox AnimalSummary;

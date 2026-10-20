@@ -84,6 +84,8 @@ This feature provides real-time filtering capabilities across all record attribu
 - Filters records instantly as the user types into the search box.
 - Searches across all properties concurrently (Animal ID, Name, Species, Gender, Age, Date Admitted, and Recovery Score).
 - Safely handles numeric and date fields alongside text strings to avoid type-mismatch exceptions.
+
+## Automatic Recovery Score Feature
 **Recovery Score Classification**
 
 | Recovery Score | Status | Housing Unit |
@@ -94,7 +96,7 @@ This feature provides real-time filtering capabilities across all record attribu
 | 60–79 | Recovering | Outdoor Enclosure |
 | 80–100 | Release-Ready | Pre-Release Camp |
 
-**File Format**
+## File Format
 
 Each animal record must be saved using this format:
 

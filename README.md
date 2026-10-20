@@ -56,16 +56,34 @@ This feature allows the user to add a new animal to the Baobab Ridge Wildlife Re
 - Saves the animal's information to `animals.txt` when all validation checks pass.
 - Displays an error message if the information is invalid.
 
-## Update, Delete, and Search Features
+## Update Animal Feature
 
-This module handles record management, modification, removal, and real-time filtering within the Baobab Ridge Wildlife Rehabilitation Records System.
+This feature allows users to modify existing animal records in the Baobab Ridge Wildlife Rehabilitation Records System.
 
 **What it does:**
-- Update Feature: Repurposes the entry form using an upsert pattern to load, edit, and save existing animal data while protecting the primary key (`AnimalID`).
-- Delete Feature: Allows users to select an animal from the data grid, prompts a confirmation dialog to prevent accidental data loss, and removes the record.
-- File Rewrite Strategy: Because records are stored in a flat text file (`animals.txt`), update and delete operations load the full dataset, modify or remove the target record in memory, and safely rewrite the entire file.
-- Simultaneous Multi-Field Search: Provides a real-time search box that filters across all record properties (ID, name, species, gender, age, date admitted, and recovery score) simultaneously without type-mismatch errors.
+- Repurposes the entry form using an upsert pattern to load, edit, and save existing animal data.
+- Protects the primary key by locking the `AnimalID` field during updates.
+- Loads the full dataset, modifies the target record in memory, and safely rewrites the entire `animals.txt` file via the repository layer.
 
+
+## Delete Animal Feature
+
+This feature allows users to remove obsolete or incorrect animal records from the system.
+
+**What it does:**
+- Allows users to select an animal row directly from the data grid.
+- Prompts a confirmation dialog box to prevent accidental data loss before executing.
+- Removes the record from the dataset in memory and rewrites `animals.txt` to reflect the removal.
+
+
+## Multi-Field Search Feature
+
+This feature provides real-time filtering capabilities across all record attributes simultaneously.
+
+**What it does:**
+- Filters records instantly as the user types into the search box.
+- Searches across all properties concurrently (Animal ID, Name, Species, Gender, Age, Date Admitted, and Recovery Score).
+- Safely handles numeric and date fields alongside text strings to avoid type-mismatch exceptions.
 **Recovery Score Classification**
 
 | Recovery Score | Status | Housing Unit |

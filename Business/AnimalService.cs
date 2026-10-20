@@ -9,10 +9,6 @@ namespace WildLifeRehabilitationCenter.Business
 	{
 		private readonly AnimalRepository _repository = new AnimalRepository();
 
-
-         
-
-
 		public void UpdateAnimal(Animal updatedAnimal)
 		{
 			var animals = _repository.GetAllAnimals();
@@ -24,7 +20,6 @@ namespace WildLifeRehabilitationCenter.Business
 				existingAnimal.Name = updatedAnimal.Name;
 				existingAnimal.Species = updatedAnimal.Species;
 				existingAnimal.Age = updatedAnimal.Age;
-				existingAnimal.Gender = updatedAnimal.Gender;
 				existingAnimal.RecoveryScore = updatedAnimal.RecoveryScore;
 				existingAnimal.HousingUnit = updatedAnimal.HousingUnit;
 

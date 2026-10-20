@@ -12,8 +12,6 @@ namespace WildLifeRehabilitationCenter.Data
         public string Status { get; set; }
         public string HousingUnit { get; set; }
 
-        // Kept for compatibility with other parts of the project.
-        public string Gender { get; set; }
         public DateTime DateAdmitted { get; set; }
 
         // Constructor for the required seven-field file format.
@@ -24,7 +22,6 @@ namespace WildLifeRehabilitationCenter.Data
             Name = name;
             Species = species;
             Age = age;
-            Gender = "";
             DateAdmitted = DateTime.Now;
             RecoveryScore = recoveryScore;
             Status = status;
@@ -33,14 +30,13 @@ namespace WildLifeRehabilitationCenter.Data
 
         // Constructor for code that still uses Gender and DateAdmitted.
         public Animal(string animalID, string name, string species,
-            int? age, string gender, DateTime dateAdmitted,
+            int? age, DateTime dateAdmitted,
             int recoveryScore, string housingUnit)
         {
             AnimalID = animalID;
             Name = name;
             Species = species;
             Age = age;
-            Gender = gender;
             DateAdmitted = dateAdmitted;
             RecoveryScore = 0;
             Status = "Critical";
@@ -51,13 +47,12 @@ namespace WildLifeRehabilitationCenter.Data
 
         // Constructor used by the original Add Animal form.
         public Animal(string animalID, string name, string species,
-            int? age, string gender, DateTime dateAdmitted)
+            int? age, DateTime dateAdmitted)
         {
             AnimalID = animalID;
             Name = name;
             Species = species;
             Age = age;
-            Gender = gender;
             DateAdmitted = dateAdmitted;
             RecoveryScore = 0;
             Status = "Critical";

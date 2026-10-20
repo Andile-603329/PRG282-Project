@@ -14,8 +14,8 @@ namespace WildLifeRehabilitationCenter.Presentation
             AnimalRepository AnimalRepo = new AnimalRepository();
             var animals = new List<Animal>()
 {
-            new Animal("WR-0001", "Kiki", "Parrot",5, "Female", DateTime.Now,43,"Recovery Ward"),
-            new Animal("WR-0987", "Max", "Dog", null,"Male", DateTime.Now,16,"Intensive Care Unit")
+            new Animal("WR-0001", "Kiki", "Parrot",5, DateTime.Now,43,"Recovery Ward"),
+            new Animal("WR-0987", "Max", "Dog", null, DateTime.Now,16,"Intensive Care Unit")
 };
 
             AnimalRepo.SeedAnimals(animals);
@@ -107,7 +107,6 @@ namespace WildLifeRehabilitationCenter.Presentation
                     (a.AnimalID != null && a.AnimalID.ToLower().Contains(searchTerm)) ||
                     (a.Name != null && a.Name.ToLower().Contains(searchTerm)) ||
                     (a.Species != null && a.Species.ToLower().Contains(searchTerm)) ||
-                    (a.Gender != null && a.Gender.ToLower().Contains(searchTerm)) ||
                     (a.Age.HasValue && a.Age.Value.ToString().Contains(searchTerm)) ||
                     (a.DateAdmitted.ToString("yyyy-MM-dd").Contains(searchTerm)) ||
                     (a.RecoveryScore.ToString().Contains(searchTerm))

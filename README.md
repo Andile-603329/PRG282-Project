@@ -9,18 +9,17 @@ An application for managing wildlife rehabilitation records.
 - Armand Bosman 603207
 
 ## 📑 Table of Contents
-- [Technologies](#-technologies)
-- [Project Structure](#-project-structure)
-- [System Requirements](#-system-requirements)
-- [Core Classes](#-core-classes)
-- [Features](#-features)
+- [Technologies](#technologies)
+- [Project Structure](#project-structure)
+- [System Requirements](#system-requirements)
+- [Core Classes](#core-classes)
+- [Features](#features)
   - [Add Animal](#add-animal-feature)
   - [Update Animal](#update-animal-feature)
   - [Delete Animal](#delete-animal-feature)
   - [Multi-Field Search](#multi-field-search-feature)
   - [Automatic Recovery Score Classification](#automatic-recovery-score-feature)
-- [File Storage Format](#-file-storage-format)
-- [Getting Started](#-getting-started)
+- [File Storage Format](#file-storage-format)
 
 ## Technologies
 - C# WinForms

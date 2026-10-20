@@ -1,4 +1,6 @@
-# Boabab Wild Life Rehabilitation Center
+# Baobab Wild Life Rehabilitation Center
+
+An application for managing wildlife rehabilitation records.
 
 **Team:**
 - Andile Mahlangu 603329
@@ -6,7 +8,19 @@
 - Omolemo Letswalo 603370
 - Armand Bosman 603207
 
-An application for managing wildlife rehabilitation records.
+## 📑 Table of Contents
+- [Technologies](#-technologies)
+- [Project Structure](#-project-structure)
+- [System Requirements](#-system-requirements)
+- [Core Classes](#-core-classes)
+- [Features](#-features)
+  - [Add Animal](#add-animal-feature)
+  - [Update Animal](#update-animal-feature)
+  - [Delete Animal](#delete-animal-feature)
+  - [Multi-Field Search](#multi-field-search-feature)
+  - [Automatic Recovery Score Classification](#automatic-recovery-score-feature)
+- [File Storage Format](#-file-storage-format)
+- [Getting Started](#-getting-started)
 
 ## Technologies
 - C# WinForms
@@ -100,9 +114,10 @@ This feature provides real-time filtering capabilities across all record attribu
 
 Each animal record must be saved using this format:
 
-ID|Name|Species|Age|Score|Status|Housing Unit
+`ID|Name|Species|Age|Score|Status|Housing Unit`
 
 Example:
 
+```text
 WR-0001|Thabo|African Penguin|4|85|Release-Ready|Pre-Release Camp
 

@@ -8,7 +8,7 @@ An application for managing wildlife rehabilitation records.
 - Omolemo Letswalo 603370
 - Armand Bosman 603207
 
-## 📑 Table of Contents
+## Table of Contents
 - [Technologies](#technologies)
 - [Project Structure](#project-structure)
 - [Requirements](#requirements)

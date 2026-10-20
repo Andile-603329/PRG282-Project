@@ -7,11 +7,19 @@ namespace WildLifeRehabilitationCenter.Data
 {
     public class AnimalRepository
     {
-        private readonly string fileName = "Animals.txt";
+        private readonly string fileName;
+
+        public AnimalRepository()
+        {
+            fileName = Path.Combine(AppContext.BaseDirectory, "Animals.txt");
+        }
 
         public void SeedAnimals(List<Animal> animals)
         {
-            SaveAllAnimals(animals);
+            if (!File.Exists(fileName))
+            {
+                SaveAllAnimals(animals);
+            }
         }
 
         public void SaveAnimal(Animal animal)

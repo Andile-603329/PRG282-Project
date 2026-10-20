@@ -22,6 +22,7 @@ An application for managing wildlife rehabilitation records.
   - [Delete Animal](#delete-animal-feature)
   - [Multi-Field Search](#multi-field-search-feature)
   - [Automatic Recovery Score Classification](#automatic-recovery-score-feature)
+  - [Summary Report]
 - [File Storage Format](#file-storage-format)
 
 ## Technologies

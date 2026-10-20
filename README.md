@@ -103,6 +103,22 @@ This feature provides real-time filtering capabilities across all record attribu
 | 60–79 | Recovering | Outdoor Enclosure |
 | 80–100 | Release-Ready | Pre-Release Camp |
 
+### Summary Report Feature
+
+This feature produces a summary report of all animals in the Baobab Ridge Wildlife Rehabilitation Records System for the Center manager.
+
+**What it does:**
+- Adds a Generate Summary button to the Animal Summary box on the main form.
+- Reads the animals currently saved in `animals.txt`.
+- Calculates the total number of animals, the average age and the average recovery score.
+- Counts how many animals are in each of the five statuses (Critical, Serious, Stable, Recovering and Release-Ready), including statuses with a count of 0.
+- Shows the report on the form and saves it to `summary.txt` next to the .exe, overwriting the old file each time.
+- Shows averages to two decimal places with a full stop, whatever the computer's regional settings are.
+- Shows 0 for the total and statuses and N/A for both averages when there are no animals, without crashing.
+- Shows a friendly message if `summary.txt` cannot be saved, for example when it is open in another program or set to read-only.
+
+**Classes used:** `SummaryResult` and `SummaryService` (Business), `AnimalClassifier` (Business) and `SummaryFileRepository` (Data).
+
 ## File Storage Format
 
 Each animal record must be saved using this format:

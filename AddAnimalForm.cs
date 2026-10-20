@@ -215,6 +215,8 @@ namespace WildLifeRehabilitationCenter
             repository.SaveAnimal(newAnimal);
 
             MessageBox.Show("Animal added successfully!");
+            this.DialogResult = DialogResult.OK;
+            this.Close();
 
             txtAnimalID.Clear();
             txtName.Clear();

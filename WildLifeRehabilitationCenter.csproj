@@ -12,10 +12,4 @@
     <PackageReference Include="NuGet.Frameworks" Version="7.9.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Data\Animals.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

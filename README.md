@@ -11,8 +11,11 @@ An application for managing wildlife rehabilitation records.
 ## 📑 Table of Contents
 - [Technologies](#technologies)
 - [Project Structure](#project-structure)
-- [System Requirements](#system-requirements)
+- [Requirements](#requirements)
 - [Core Classes](#core-classes)
+  - [Animal Class](#animal-class)
+  - [AnimalRepository Class](#animalrepository-class)
+  - [AnimalService](#animalservice-class)
 - [Features](#features)
   - [Add Animal](#add-animal-feature)
   - [Update Animal](#update-animal-feature)
@@ -34,28 +37,19 @@ An application for managing wildlife rehabilitation records.
 ## Requirements
 - .NET 8.0 or above
 
-## Classes
+## Core Classes
 
--Animal Class:
-	the Animal class serves as the core data model for the WildLife Rehabilitation Center application,
-	it captures essential details about each animal admitted including identifiers (AnimalID), biological information (Species,Age,Gender),
-	and health tracking (RecoverScore, Status).
-	This class provides a structured foundation for storing, retrieving, and managing animal records across the system.
+### Animal Class:
+the Animal class serves as the core data model for the WildLife Rehabilitation Center application, it captures essential details about each animal admitted including identifiers (AnimalID), biological information (Species,Age,Gender), and health tracking (RecoverScore, Status). This class provides a structured foundation for storing, retrieving, and managing animal records across the system.
 
+### AnimalRepository Class:
+The AnimalRepository class manages persistence and retrieval of animal records using a text file (Animals.txt). It provides methods to seed initial data, save individual animals,LoadAnimals method that converts a list of Animal objects into a DataTable, making it easy to bind records to UI components such as grids. This class acts as the data access layer, ensuring consistent storage and retrieval of animal information across the application.
 
--AnimalRepository Class:
-	The AnimalRepository class manages persistence and retrieval of animal records using a text file (Animals.txt).
-	It provides methods to seed initial data, save individual animals,LoadAnimals method that converts a list of Animal objects into a DataTable,
-	making it easy to bind records to UI components such as grids.
-	This class acts as the data access layer, ensuring consistent storage and retrieval of animal information across the application.
-
--AnimalService Class:
-	The AnimalService class coordinates the business logic between the user interface and the data repository. 
-	It handles the implementation for updating existing records (`UpdateAnimal`), removing records (`DeleteAnimal`), 
-	and ensuring data integrity and file synchronization through the repository layer.
+### AnimalService Class: 
+The AnimalService class coordinates the business logic between the user interface and the data repository.  It handles the implementation for updating existing records (`UpdateAnimal`), removing records (`DeleteAnimal`),  and ensuring data integrity and file synchronization through the repository layer.
 	
-
-## Add Animal Feature
+## Features
+### Add Animal Feature
 
 This feature allows the user to add a new animal to the Baobab Ridge Wildlife Rehabilitation Records System.
 
@@ -69,7 +63,7 @@ This feature allows the user to add a new animal to the Baobab Ridge Wildlife Re
 - Saves the animal's information to `animals.txt` when all validation checks pass.
 - Displays an error message if the information is invalid.
 
-## Update Animal Feature
+### Update Animal Feature
 
 This feature allows users to modify existing animal records in the Baobab Ridge Wildlife Rehabilitation Records System.
 
@@ -79,7 +73,7 @@ This feature allows users to modify existing animal records in the Baobab Ridge 
 - Loads the full dataset, modifies the target record in memory, and safely rewrites the entire `animals.txt` file via the repository layer.
 
 
-## Delete Animal Feature
+### Delete Animal Feature
 
 This feature allows users to remove obsolete or incorrect animal records from the system.
 
@@ -89,7 +83,7 @@ This feature allows users to remove obsolete or incorrect animal records from th
 - Removes the record from the dataset in memory and rewrites `animals.txt` to reflect the removal.
 
 
-## Multi-Field Search Feature
+### Multi-Field Search Feature
 
 This feature provides real-time filtering capabilities across all record attributes simultaneously.
 
@@ -109,7 +103,7 @@ This feature provides real-time filtering capabilities across all record attribu
 | 60–79 | Recovering | Outdoor Enclosure |
 | 80–100 | Release-Ready | Pre-Release Camp |
 
-## File Format
+## File Storage Format
 
 Each animal record must be saved using this format:
 
